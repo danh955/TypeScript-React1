@@ -1,22 +1,26 @@
 import * as React from 'react';
 
 interface SquareProps extends React.Props<any> {
-  value: number;
-  onclick: () => void;
+  value: string;
+  onClick: () => void;
 }
 
 class Square extends React.Component<SquareProps> {
   render() {
       return (
-        <button className="square" onClick={this.props.onclick}>
+        <button className="square" onClick={this.props.onClick}>
             {this.props.value}
         </button>
       );
     }
 }
 
-/*
-class Board extends React.Component {
+interface BoardProps extends React.Props<any> {
+  squares: string[];
+  onClick: (i: number) => void;
+}
+
+class Board extends React.Component<BoardProps> {
   renderSquare(i: number) {
     return (
       <Square 
@@ -49,6 +53,7 @@ class Board extends React.Component {
   }
 }
 
+/*
 class Game extends React.Component {
   constructor(props) {
     super(props);
