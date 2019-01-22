@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './Game.css';
 
 interface SquareProps extends React.Props<any> {
   value: string;
@@ -173,3 +174,4 @@ function calculateWinner(squares: string[]) {
   return null;
 }
 
+export default Game;
