@@ -154,7 +154,7 @@ ReactDOM.render(
 );
 */
 
-function calculateWinner(squares: string[]) {
+function calculateWinner(squares: string[]): string | null {
   const lines: number[][] = [
     [0, 1, 2],
     [3, 4, 5],
