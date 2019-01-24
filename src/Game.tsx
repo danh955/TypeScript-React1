@@ -1,20 +1,6 @@
 import * as React from 'react';
 import './Game.css';
-
-interface SquareProps extends React.Props<any> {
-  value: string;
-  onClick: () => void;
-}
-
-class Square extends React.Component<SquareProps> {
-  render() {
-      return (
-        <button className="square" onClick={this.props.onClick}>
-            {this.props.value}
-        </button>
-      );
-    }
-}
+import Square from './Square'
 
 interface BoardProps extends React.Props<any> {
   squares: string[];
