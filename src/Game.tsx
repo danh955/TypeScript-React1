@@ -1,44 +1,6 @@
 import * as React from 'react';
+import Board from './Board'
 import './Game.css';
-import Square from './Square'
-
-interface BoardProps extends React.Props<any> {
-  squares: string[];
-  onClick: (i: number) => void;
-}
-
-class Board extends React.Component<BoardProps> {
-  renderSquare(i: number) {
-    return (
-      <Square 
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-      />
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
-}
 
 interface SquareHistory {
   squares: string[]
@@ -54,7 +16,7 @@ interface GameState {
   stepNumber: number;
 }
 
-class Game extends React.Component<GameProps, GameState> {
+export default class Game extends React.Component<GameProps, GameState> {
   constructor(props: GameProps) {
     super(props);
     this.state = {
@@ -159,5 +121,3 @@ function calculateWinner(squares: string[]): string | null {
   }
   return null;
 }
-
-export default Game;
