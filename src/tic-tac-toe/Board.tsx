@@ -5,36 +5,25 @@ interface BoardProps extends React.Props<any> {
     squares: string[];
     onClick: (i: number) => void;
 }
-    
-export default class Board extends React.Component<BoardProps> {
-    renderSquare(i: number) {
-        return (
-        <Square 
-            value={this.props.squares[i]}
-            onClick={() => this.props.onClick(i)}
-        />
-        );
-    }
 
-    render() {
-        return (
-        <div>
-            <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-            </div>
-            <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-            </div>
-            <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-            </div>
-        </div>
-        );
+// This will render a 3x3 board.
+export default class Board extends React.Component<BoardProps> {
+    render(): JSX.Element {
+        const rowElements: JSX.Element[] = [];
+        for (let rowIdx = 0; rowIdx < this.props.squares.length; rowIdx += 3)
+        {
+            const columnElements: JSX.Element[] = [];
+            for(let columnIdx = rowIdx; columnIdx < rowIdx + 3; columnIdx++)
+            {
+                columnElements.push(
+                    <Square 
+                        value={this.props.squares[columnIdx]}
+                        onClick={() => this.props.onClick(columnIdx)}
+                    />);
+            }
+            rowElements.push(<div className="board-row"> {columnElements} </div>);
+        }
+
+        return (<div>{rowElements}</div>);
     }
 }
