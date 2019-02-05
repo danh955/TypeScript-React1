@@ -3,7 +3,8 @@ import Board from './Board'
 import './Game.css';
 
 interface SquareHistory {
-  squares: string[]
+  squares: string[];
+  move: number | null;
 }
 
 interface GameProps extends React.Props<any>
@@ -19,9 +20,12 @@ interface GameState {
 export default class Game extends React.Component<GameProps, GameState> {
   constructor(props: GameProps) {
     super(props);
+
+    // Init board for first use.
     this.state = {
       history: [{
           squares: Array(9).fill(null),
+          move: null
         }],
       xIsNext: true,
       stepNumber: 0,
@@ -39,7 +43,7 @@ export default class Game extends React.Component<GameProps, GameState> {
 
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
-      history: history.concat([{ squares: squares }]),
+      history: history.concat([{ squares: squares, move: i }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
     });
@@ -59,10 +63,14 @@ export default class Game extends React.Component<GameProps, GameState> {
 
     const moves: JSX.Element[] = history.map(
       (step, move) => {
+        const row: number = Math.floor(step.move! / 3) + 1;
+        const column: number = step.move! % 3 + 1;
+
         const desc = move ?
-          'Go to move #' + move :
+          '#' + move + ' Go to move (' + row + ',' + column + ')' :
           'Go to game start';
-        return (
+
+          return (
           <li key={move}>
             <button onClick={() => this.jumpTo(move)}>{desc}</button>
           </li>
